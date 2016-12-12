@@ -1,19 +1,14 @@
-
 module.exports.router = {
     init_filter: function() {
-    	// 异常拦截
-        app.use(function(req,res,next){
-          
-            next();
-        });
-        // 登陆拦截
-        app.use(function(req,res,next){
-            console.log('拦截2号');
+    	// 登陆拦截
+        app.use("/rule*",function(req,res,next){
+           console.log('登陆拦截');
             next();
         });
     },
     init_router:function(){
-    	app.get("*", function(req, res, next) {
+        //不需要请求接口的页面展示
+    	app.get("/static*", function(req, res, next) {
     		console.log('开始转发到相应请求页面');
             let url = '';
             let params = {};

@@ -50,3 +50,14 @@ Author by ying.li
 3、确保没有相关服务被开启，重启sublime text 3 ，运行ctrl+b
 
 ===========================  Nodejs热部署 end  ===========================  
+Written in 2016-12-12
+Author by ying.li
+===========================  项目依赖的环境 start ===========================  
+
+npm install express
+npm install http
+npm install socket.io
+npm install ejs
+npm install fs
+npm install domain
+===========================  项目依赖的环境 end ===========================  

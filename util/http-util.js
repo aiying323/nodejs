@@ -1,25 +1,29 @@
-/*封装的http请求：
-使用示例如下：
+/*
+	封装的http请求：
+	使用示例如下：
 
-var $http = require("./util/http-util.js");
+	var $http = require("./util/http-util.js");
 
-$http.get("http://fbabyapi.bblink.cn/content/list/tab2",function(data){
-	console.log(data);
-});
+	$http.get("http://fbabyapi.bblink.cn/content/list/tab2",function(data){
+		console.log(data);
+	});
 */
 module.exports.get=function(url,callback){
 	http.get(url, function(res) {
+		console.log(res.statusCode);
 	    if (res.statusCode === 200) {
 	        let body = '';
 	        res.on("data", function(chunk) {
-	            body += chunk.toString("utf8")
+	            body += chunk.toString("utf8");
+	            console.log('返回体是：'+body);
 	        });
 	        res.on("end", function() {
 	            try {
 	                let data = JSON.parse(body);
 	                callback(data);
 	            } catch (e) {
-	                console.log("我捕获到异常了！！！"+e);
+	                console.log("我捕获到JSON异常了！！！"+e);
+	                throw e;
 	            }
 	        });
 	    } else {
@@ -27,7 +31,8 @@ module.exports.get=function(url,callback){
 	    }
 
 	}).on("error", function(e) {
+
 	    console.error("我捕获到异常了！！！"+e);
+	    throw  e;
 	});	
 }
-
